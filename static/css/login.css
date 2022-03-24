@@ -8210,12 +8210,21 @@ h1, h2, h3, h4, h5,
 .field-icon {
   position: absolute;
   top: 68%;
-  right: 24px;
+  right: 20px;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   color: #DA162A; }
   
+.field-icon-login {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: #add8e6; }
+    
 .form-control {
   background: transparent;
   border: none;
