@@ -10,13 +10,15 @@ pub_ip = r"35.198.145.47"
 dbname = r"Iberia_IT"
 project_id = r"elated-lotus-344717"
 instance_name = r"iberia-it"
-db_port = 3306
+db_port = "3306"
 
 app.config["SECRET_KEY"] = "this is not secret, remember, change it!"
 
 db_url = f"mysql+pymysql://root:{ocl_pw}@{pub_ip}:{db_port}/{dbname}" #TCP
 
 engine = create_engine(db_url)
+
+
 mo1 = 'jan'
 mo2 = 'feb'
 mo3 = 'mar'
