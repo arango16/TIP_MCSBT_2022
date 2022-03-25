@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+
+{% block main %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/charts/chart_settings.css">   
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+            <form class="dashboard-buttons">
+    			<a href="/status_kpis" class="login100-form-btn login100-form-bgbtn-selected">Status</a>
+    			<a href="/capacity_kpis" class="login100-form-btn login100-form-bgbtn">Capacity</a>
+    			<a href="/planning_kpis" class="login100-form-btn login100-form-bgbtn">Planning</a>			
+            </form> 
+
+
+<body>
+<div class="container-allkpi">
+<!---------- KPI 1 - Line Chart Priority -------->
+
+<canvas id="kpi2-status"></canvas> 
+<div class="container-kpi2">  
+     <div id="chart"></div>
+
+    <script>
+      
+        var options = {
+          series: [{
+          name: 'Application Tower',
+          data: {{ app_twr | safe}}
+        }, {
+          name: 'Server Tower',
+          data: {{serv_twr | safe}}
+        }, {
+          name: 'Service Ops Tower',
+          data: {{serv_op_twr | safe}}
+        },{
+          name: 'Network Tower',
+          data: {{net_twr | safe}}
+        }, {
+          name: 'Delivery',
+          data: {{ delv | safe}}
+        }, {
+          name: 'EUC',
+          data: {{ euc | safe}}
+        }, {
+          name: 'Equipos Multifunción',
+          data: {{ eq_mf | safe }}
+        }, {
+          name: 'Seguridad',
+          data: {{ seg | safe}}
+        },{
+          name: 'Unknown',
+          data: {{ unk | safe}}
+        }
+        
+        ],
+          chart: {
+          type: 'bar',
+          height: 350,
+          stacked: true,
+          toolbar: {
+            show: true
+          },
+          zoom: {
+            enabled: true
+          }
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0
+            }
+          }
+        }],
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            borderRadius: 10
+          },
+        },
+        xaxis: {
+            categories: {{ labels | safe}}
+          ,
+        },
+        legend: {
+          position: 'right',
+          offsetY: 40
+        },
+        colors: ['#F9CD03', '#E97B0D', '#DA162A', '#A8151C', '#C11623', '#F6AF03'], 
+        fill: {
+          opacity: 1
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+      
+      
+    </script>
+
+</div>
+</div>
+</body>
+
+
+
+
+
+
+
+
+{% endblock %}

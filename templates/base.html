@@ -44,12 +44,13 @@
          
     {% block main %}
             <form class="dashboard-buttons">
-    			<a href="{{url_for('status_kpis') }}" class="login100-form-btn login100-form-bgbtn">Status</a>
+    			<a href="{{url_for('status_kpi1') }}" class="login100-form-btn login100-form-bgbtn">Status</a>
     			<a href="{{url_for('capacity_kpis') }}" class="login100-form-btn login100-form-bgbtn">Capacity</a>
     			<a href="{{url_for('planning_kpis') }}" class="login100-form-btn login100-form-bgbtn">Planning</a>			          
             </form> 
             <div class="container-allkpi">
-                <h1 style="text-align: center">WELCOME TO THE IBERIA IT INCIDENTS DASHBOARD</h1>
+                <h1 style="text-align: center">Hello {{ logged_in}}!
+                <h2 style="text-align: center">WELCOME TO THE IBERIA IT INCIDENTS DASHBOARD</h2>
                 <h3 style="text-align: center">Feel free to navigate the different tabs</h3> 
             </div>
 

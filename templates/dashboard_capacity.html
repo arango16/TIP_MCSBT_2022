@@ -2,11 +2,79 @@
 
 
 {% block main %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/charts/chart_settings.css">
+
+
             <form class="dashboard-buttons">
-    			<a href="/status_kpis" class="login100-form-btn login100-form-bgbtn">Status</a>
+    			<a href="/status_kpi1" class="login100-form-btn login100-form-bgbtn">Status</a>
     			<a href="/capacity_kpis" class="login100-form-btn login100-form-bgbtn-selected">Capacity</a>
     			<a href="/planning_kpis" class="login100-form-btn login100-form-bgbtn">Planning</a>			
             </form> 
+
+
+
+<body>
+
+<div class="container-allkpi">
+
+
+<div class="kpi1_capacity">
+
+                <canvas id="kpi2-chart" width="1000" height="1000" position="relative" bottom="100"></canvas>
+                <script>
+
+                    var ctx2 = document.getElementById('kpi2-chart').getContext('2d')
+
+                    var barChart2 = new Chart(ctx2, {
+                        type: 'line',
+                        data: {
+                            labels: {{ labels | safe }},
+                            datasets: [{
+                                label: "Resolution Ratio",
+                                data: {{ data | safe}},
+                                backgroundColor: '#F9CD03',
+                                borderColor: '#E97B0D',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            legend: false
+
+                        }
+                    });
+
+                </script>
+            <p>Note: calculated as total closed incidents over total raised incidents</p>
+</div>
+
+
+
+</div>
+<!----------------------------------------------------------->
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
 
 
 {% endblock %}

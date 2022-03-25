@@ -1,3 +1,97 @@
-  <div class="test_final">
-    <h1><a href="{{url_for('test_insert')}}"> {{test_final}}</a></h1>
-  </div>
+{% extends "base.html" %}
+
+
+{% block main %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/charts/chart_settings.css">
+
+
+            <form class="dashboard-buttons">
+    			<a href="/status_kpi1" class="login100-form-btn login100-form-bgbtn-selected">Status</a>
+    			<a href="/capacity_kpis" class="login100-form-btn login100-form-bgbtn">Capacity</a>
+    			<a href="/planning_kpis" class="login100-form-btn login100-form-bgbtn">Planning</a>			
+            </form> 
+
+
+
+<body>
+
+<div class="container-allkpi">
+
+
+<div class="kpi1_capacity">
+
+                <canvas id="kpi2-chart" width="1000" height="1000" position="relative" bottom="100"></canvas>
+                <script>
+
+                    var ctx2 = document.getElementById('kpi2-chart').getContext('2d')
+
+                    var barChart2 = new Chart(ctx2, {
+                        type: 'line',
+                        data: {
+                            labels: ['hoy', 'es', 'viernes'],
+                            datasets: [{
+                                label: "Low",
+                                data: [1,2,3],
+                                backgroundColor: 'rgba(145,206,145,0.8)',
+                                borderColor: 'rgba(0,255,0,0.8)',
+                                borderWidth: 1
+                            }, {
+                                label: "Medium",
+                                data: [1,2,3],
+                                backgroundColor: 'rgba(232,229,151,0.8)',
+                                borderColor: 'rgba(252,237,1,0.8)',
+                                borderWidth: 1
+                            }, {
+                                label: "High",
+                                data: [1,2,3],
+                                backgroundColor: 'rgba(236,147,180,0.8)',
+                                borderColor: 'rgba(245,5,95,0.8)',
+                                borderWidth: 1
+                            }, {
+                                label: "Critical",
+                                data: [1,2,3],
+                                backgroundColor: 'rgba(165,21,67,0.8)',
+                                borderColor: 'rgba(245,5,95,0.8)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            legend: false
+
+                        }
+                    });
+
+                </script>
+</div>
+
+
+
+</div>
+<!----------------------------------------------------------->
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+
+
+{% endblock %}
