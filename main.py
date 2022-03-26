@@ -43,8 +43,8 @@ def register():
 @app.route("/register", methods=["POST"])
 def handle_register():
     auth_code=request.form["auth_code"]
-    first_name=request.form["first_name"]
-    last_name=request.form["last_name"]
+    first_name=request.form["first_name"].title()
+    last_name=request.form["last_name"].title()
     email=request.form["email"].lower()
     username=request.form["username"]
     password=request.form["password"]
@@ -165,11 +165,7 @@ def dashboard():
 @app.route("/status_kpi1")
 def status_kpi1():
     #KPI 1 - Line Chart Priority
-    mo1 = 'jan'
-    mo2 = 'feb'
-    mo3 = 'mar'
-    mo4 = 'apr'
-    year = 2021
+
     labels = [mo1.title()+str(year), mo2.title()+str(year), mo3.title()+str(year), mo4.title()+str(year)]
     
     if "username" in session:
@@ -354,8 +350,58 @@ def planning_kpis():
             
         
         
-        return render_template('dashboard_planning.html', open_tickets=open_tickets)
 
-# app.run(debug=True)
-if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    #KPI 2 - OPEN TICKETS BY PRIORITY
+        data = {'Baja':[], 'Media':[], 'Alta':[], 'Crítica':[]}
+        
+        labels = [mo1.title()+str(year), mo2.title()+str(year), mo3.title()+str(year), mo4.title()+str(year)]
+        for k in data.keys():
+            
+            
+            query_jan = f"""
+            SELECT count(*)
+            FROM monthly_incidents_backlog_jan
+            WHERE (priority='{k}' AND Customer_Company_Group='IBERIA')
+            """
+    
+            query_feb = f"""
+            SELECT count(*)
+            FROM monthly_incidents_backlog_feb
+            WHERE (priority='{k}' AND Customer_Company_Group='IBERIA')
+            """
+            
+            query_mar = f"""
+            SELECT count(*)
+            FROM monthly_incidents_raised_mar
+            WHERE (priority='{k}' AND Customer_Company_Group='IBERIA')
+            """
+            
+            query_apr = f"""
+            SELECT count(*)
+            FROM monthly_incidents_raised_apr
+            WHERE (priority='{k}' AND Customer_Company_Group='IBERIA')
+            """
+            
+            with engine.connect() as connection:
+                jan2021 = connection.execute(query_jan).fetchone()
+                feb2021 = connection.execute(query_feb).fetchone()
+                mar2021 = connection.execute(query_mar).fetchone()
+                apr2021 = connection.execute(query_apr).fetchone()
+                
+            data_list = [jan2021[0], feb2021[0], mar2021[0], apr2021[0]]
+            data[k] = data_list        
+        
+        low = data.get('Baja')
+        medium = data.get('Media')
+        high = data.get('Alta')
+        critical = data.get('Crítica')
+    
+        return render_template('dashboard_planning.html', labels=labels, open_tickets=open_tickets, low=low, medium=medium, high=high, critical=critical)
+    
+@app.route("/under_construction")
+def under_construction():
+    return render_template("under_construction.html")
+
+app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

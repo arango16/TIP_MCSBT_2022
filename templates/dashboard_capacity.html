@@ -26,10 +26,10 @@
 
 <div class="kpi1_capacity">
 
-                <canvas id="kpi2-chart" width="1000" height="1000" position="relative" bottom="100"></canvas>
+                <canvas id="kpi1-capacity" width="200" height="100" position="relative" bottom="100"></canvas>
                 <script>
 
-                    var ctx2 = document.getElementById('kpi2-chart').getContext('2d')
+                    var ctx2 = document.getElementById('kpi1-capacity').getContext('2d')
 
                     var barChart2 = new Chart(ctx2, {
                         type: 'line',
@@ -38,9 +38,9 @@
                             datasets: [{
                                 label: "Resolution Ratio",
                                 data: {{ data | safe}},
-                                backgroundColor: '#F9CD03',
+                                backgroundColor: '#E97B0D',
                                 borderColor: '#E97B0D',
-                                borderWidth: 1
+                                borderWidth: 5
                             }]
                         },
                         options: {
